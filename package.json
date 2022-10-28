@@ -218,6 +218,7 @@
     "typeface-roboto": "^1.1.13",
     "use-debounce": "^7.0.0",
     "user-agents": "^1.0.1048",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "node": "^14.20.1"
   }
 }

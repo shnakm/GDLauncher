@@ -26,7 +26,7 @@ const InstanceStartupAd = ({ instanceName }) => {
   return (
     <Modal
       css={`
-        height: 330px;
+        height: 200px;
         width: 650px;
         overflow-x: hidden;
       `}
@@ -56,47 +56,6 @@ const InstanceStartupAd = ({ instanceName }) => {
             `}
           />
         </span>
-        <div
-          css={`
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            & > * {
-              margin: 0 20px;
-            }
-          `}
-        >
-          <span
-            css={`
-              font-size: 14px;
-            `}
-          >
-            Grab a server from <br /> our official partner
-          </span>
-          <div
-            css={`
-              cursor: pointer;
-            `}
-          >
-            <BisectHosting
-              onClick={openBisectHostingModal}
-              size={60}
-              showPointerCursor
-            />
-          </div>
-          <div>
-            <span
-              css={`
-                font-size: 70px;
-                color: ${({ theme }) => theme.palette.colors.red};
-              `}
-            >
-              &#10084;
-            </span>
-            <div>Thank you!</div>
-          </div>
-        </div>
       </div>
     </Modal>
   );

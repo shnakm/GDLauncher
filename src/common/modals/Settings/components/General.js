@@ -13,7 +13,6 @@ import {
   faTrash,
   faPlay,
   faToilet,
-  faNewspaper,
   faFolder,
   faFire,
   faSort
@@ -31,7 +30,6 @@ import {
   updateHideWindowOnGameLaunch,
   updatePotatoPcMode,
   updateInstanceSortType,
-  updateShowNews,
   updateCurseReleaseChannel
 } from '../../../reducers/settings/actions';
 import { updateConcurrentDownloads } from '../../../reducers/actions';
@@ -161,7 +159,6 @@ const General = () => {
   const isPlaying = useSelector(state => state.startedInstances);
   const queuedInstances = useSelector(state => state.downloadQueue);
   const updateAvailable = useSelector(state => state.updateAvailable);
-  const showNews = useSelector(state => state.settings.showNews);
   const DiscordRPC = useSelector(state => state.settings.discordRPC);
   const potatoPcMode = useSelector(state => state.settings.potatoPcMode);
   const concurrentDownloads = useSelector(
@@ -434,18 +431,6 @@ const General = () => {
             }
           }}
           checked={DiscordRPC}
-        />
-      </Content>
-      <Title>
-        Minecraft News &nbsp; <FontAwesomeIcon icon={faNewspaper} />
-      </Title>
-      <Content>
-        <p>Enable / disable Minecraft news.</p>
-        <Switch
-          onChange={e => {
-            dispatch(updateShowNews(e));
-          }}
-          checked={showNews}
         />
       </Content>
       <Title>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, memo } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faClock } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { ipcRenderer } from 'electron';
@@ -9,14 +9,14 @@ import axios from 'axios';
 // import { promises as fs } from 'fs';
 // import path from 'path';
 import Instances from '../components/Instances';
-import News from '../components/News';
 import { openModal } from '../../../common/reducers/modals/actions';
 import {
-  _getCurrentAccount
-  // _getInstances
+  _getCurrentAccount,
+  _getInstances
 } from '../../../common/utils/selectors';
 import { extractFace } from '../utils';
 import { updateLastUpdateVersion } from '../../../common/reducers/actions';
+import { convertMinutesToHumanTime } from '../../../common/utils';
 
 const AddInstanceIcon = styled(Button)`
   position: fixed;
@@ -32,12 +32,23 @@ const AccountContainer = styled(Button)`
   align-items: center;
 `;
 
+const TotalTimePlayed = styled(Button)`
+  position: fixed;
+  bottom: 20px;
+  right: 160px;
+  display: flex;
+  align-items: center;
+`;
+
 const Home = () => {
   const dispatch = useDispatch();
   const account = useSelector(_getCurrentAccount);
-  const news = useSelector(state => state.news);
   const lastUpdateVersion = useSelector(state => state.app.lastUpdateVersion);
-  // const instances = useSelector(_getInstances);
+  const instances = useSelector(_getInstances);
+  let totalPlayed = 0;
+  instances.forEach(instance => {
+    totalPlayed += instance.timePlayed;
+  });
 
   const openAddInstanceModal = defaultPage => {
     dispatch(openModal('AddInstance', { defaultPage }));
@@ -76,7 +87,6 @@ const Home = () => {
 
   return (
     <div>
-      <News news={news} />
       {annoucement ? (
         <div
           css={`
@@ -94,6 +104,16 @@ const Home = () => {
       <AddInstanceIcon type="primary" onClick={() => openAddInstanceModal(0)}>
         <FontAwesomeIcon icon={faPlus} />
       </AddInstanceIcon>
+      <TotalTimePlayed type="primary">
+        <div
+          css={`
+            margin-right: 10px;
+          `}
+        >
+          <FontAwesomeIcon icon={faClock} />
+        </div>
+        Total Played: {convertMinutesToHumanTime(totalPlayed)}
+      </TotalTimePlayed>
       <AccountContainer type="primary" onClick={openAccountModal}>
         {profileImage ? (
           <img

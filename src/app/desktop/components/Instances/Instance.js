@@ -89,7 +89,7 @@ const InstanceContainer = styled.div`
   color: ${props => props.theme.palette.text.secondary};
   font-weight: 600;
   background-size: cover;
-  border-radius: 4px;
+  border-radius: 9px;
   margin: 10px;
 `;
 
